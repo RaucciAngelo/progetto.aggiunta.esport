@@ -60,4 +60,5 @@ public class RuoloBean {
 	public static final String UTENTE="Utente";
 	public static final String CATALOGO="Catalogo";
 	public static final String ORDINI="Ordini";
+	public static final String RECLAMO="Reclamo";
 }

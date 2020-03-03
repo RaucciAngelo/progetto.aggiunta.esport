@@ -37,6 +37,10 @@ public class Ruolo extends HttpServlet {
 				log.info("Ruolo -> vado alla pagina di gestione del catalogo");
 				redirectedPage="/GestioneCatalogo?tipo=Divisa&order=nome";
 			}
+			else if(permesso.equals(RuoloBean.RECLAMO)) {
+				log.info("Ruolo -> vado alla pagina di gestione dei reclami");
+				redirectedPage="/Reclamo";
+			}
 			else {
 				log.info("Ruolo -> vado alla Home Page");
 				redirectedPage="/Index.jsp";

@@ -17,7 +17,7 @@
 			response.sendRedirect("./OnlyAdminPage.html");
 		}
 		else{
-			session.setAttribute("ruolo", RuoloBean.ORDINI);
+			session.setAttribute("ruolo", RuoloBean.RECLAMO);
 
 			boolean areAttivi=false;
 			boolean areChiusi=false;
@@ -45,7 +45,7 @@
 	<body class="py-0">
 		<!-- Navigation -->
 		<header>
-			<%@ include file="NavbarOrdini.jsp" %>
+			<%@ include file="NavbarReclamo.jsp" %>
 		</header>
 		
 		<!-- Page Content -->

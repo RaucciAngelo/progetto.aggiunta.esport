@@ -33,7 +33,8 @@
 				</ul></li>
 				
 			<%
-				if (user.getRuolo().containsKey(RuoloBean.CATALOGO) || user.getRuolo().containsKey(RuoloBean.ORDINI)) {
+				if (user.getRuolo().containsKey(RuoloBean.CATALOGO) || user.getRuolo().containsKey(RuoloBean.ORDINI)
+						|| user.getRuolo().containsKey(RuoloBean.RECLAMO)) {
 			%>
 
 			<li class="dropdown nav-item" id="hvr3"><a
@@ -44,7 +45,8 @@
 						for (RuoloBean r : user.getRuolo().values()) {
 					%>
 					<li class="dropdown-item">
-						<% if(r.getPermesso().equals(RuoloBean.CATALOGO) || r.getPermesso().equals(RuoloBean.ORDINI)) { %>
+						<% if(r.getPermesso().equals(RuoloBean.CATALOGO) || r.getPermesso().equals(RuoloBean.ORDINI)
+								|| r.getPermesso().equals(RuoloBean.RECLAMO)) { %>
 							<a href="Ruolo?permesso=<%=r.getPermesso()%>">Gestore <%=r.getPermesso()%></a></li>
 						<%}
 						   else{

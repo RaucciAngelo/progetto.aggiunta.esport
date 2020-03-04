@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.logging.Logger;
+
+import beans.OrdineBean;
 import beans.ReclamoBean;
 
 public class ReclamoModel {
@@ -50,6 +52,51 @@ public class ReclamoModel {
 		}
 		
 		log.info("IndirizzoModel -> doSave terminato");
+	}
+
+	public Set<ReclamoBean> doRetrieveAll(String order) throws SQLException{
+		log.info("OrdineModel -> doRetrieveAll");
+		LinkedHashSet<ReclamoBean> reclami=new LinkedHashSet<ReclamoBean>();
+		
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+		
+		log.info("doRetrieveAll -> eseguo query");
+		String selectSQL="select * from " + ReclamoModel.TABLE_NAME;
+		
+		if (order!=null && !order.equals("")) {
+			selectSQL+=" order by " + order;
+		}
+
+		try {
+			connection=DriverManagerConnectionPool.getConnection();
+			preparedStatement=connection.prepareStatement(selectSQL);
+
+			ResultSet rs=preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				ReclamoBean bean=new ReclamoBean();
+
+				bean.setId(rs.getInt("id"));
+				bean.setStato(rs.getString("stato"));
+				bean.setUsr(rs.getString("usr"));
+				bean.setOrdine(rs.getString("ordine"));
+				bean.setCommento(rs.getString("commento"));
+				
+				reclami.add(bean);
+			}
+		} 
+		finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+		log.info("OrdineModel -> doRetrieveAll terminato");
+		
+		return reclami;
 	}
 	
 	public Set<ReclamoBean> doRetrieveIfAttivi() throws SQLException{
@@ -95,8 +142,42 @@ public class ReclamoModel {
 		return reclami;
 	}
 	
-	public boolean doUpdate(ReclamoBean reclamo) {
+	public boolean doUpdate(ReclamoBean reclamo) throws SQLException {
+		log.info("OrdineModel -> aggiornaStato");
+		int result=0;
 		
-		return false;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		//Aggiunta controlli
+				
+		log.info("aggiornaStato -> eseguo query");
+		String updateSQL="update " + ReclamoModel.TABLE_NAME + " "
+					   + " set stato=? "
+					   + " where id=?";
+
+		try {
+			connection=DriverManagerConnectionPool.getConnection();
+			preparedStatement=connection.prepareStatement(updateSQL);
+			
+			preparedStatement.setString(1, reclamo.getStato());
+			preparedStatement.setInt(2, reclamo.getId());
+			
+			result=preparedStatement.executeUpdate();	
+			
+			connection.commit();
+		} 
+		finally {
+			try {
+				if(preparedStatement!=null)
+					preparedStatement.close();
+			} 
+			finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+		log.info("OrdineModel -> aggiornaStato terminato");	
+		
+		return (result!=0);
 	}
 }

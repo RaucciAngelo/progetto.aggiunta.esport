@@ -8,43 +8,36 @@
 	
 	UtenteBean user = (UtenteBean) session.getAttribute("userLogged");
 %>
+
+<%! String sttDsc="sottomissione desc"; %>
+
 <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
 	<button type="button" class="navbar-toggler" data-toggle="collapse"
 		data-target="#myNavbar">
 		<i class="fas fa-bars"></i>
 	</button>
 
-	<a class="navbar-brand mr-auto ml-auto" href="Index.jsp">eSport</a> <span
-		id="span-cart"> <a href="Carrello" id="cart-item" class="hvr"> <i
-			class="fas fa-shopping-cart"></i>
-	</a>
-	</span>
+	<a class="navbar-brand mr-auto ml-auto" href="Index.jsp">eSport</a>
 
 	<div class="collapse navbar-collapse" id="myNavbar">
 		<ul class="nav navbar-nav">
 			<li class="hvr nav-item"><a href="Index.jsp" class="nav-link">Home</a></li>
 
-			<li class="dropdown nav-item" id="hvr1"><a
-				class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">Catalogo</a>
+			<li class="dropdown nav-item" id="hvr3"><a
+				class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">Gestione
+					reclami</a>
 				<ul class="dropdown-menu bg-dark">
-					<li class="dropdown-item"><a href="Catalogo?tipo=Divisa&order=nome">Divise</a></li>
-					<li class="dropdown-item"><a href="Catalogo?tipo=Pantaloncini&order=nome">Pantaloncini</a></li>
-					<li class="dropdown-item"><a href="Catalogo?tipo=Scarpe&order=nome">Scarpe da gioco</a></li>
+					<li class="dropdown-item"><a href="Reclamo">Gestisci reclami</a></li>
 				</ul></li>
-
-			<li class="hvr nav-item"><a href="InCostruzione.html"
-				class="nav-link">Supporto</a></li>
-
-
+				
 			<%
-				if(user!=null){
-					if (user.getRuolo().containsKey(RuoloBean.CATALOGO) || user.getRuolo().containsKey(RuoloBean.ORDINI)
-							|| user.getRuolo().containsKey(RuoloBean.RECLAMO)) {
+				if (user.getRuolo().containsKey(RuoloBean.CATALOGO) || user.getRuolo().containsKey(RuoloBean.ORDINI)
+						|| user.getRuolo().containsKey(RuoloBean.RECLAMO)) {
 			%>
 
 			<li class="dropdown nav-item" id="hvr3"><a
 				class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">
-					Permessi: <%=ruoloToChange%></a>
+					Permessi: Gestore <%=ruoloToChange%></a>
 				<ul class="dropdown-menu bg-dark">
 					<%
 						for (RuoloBean r : user.getRuolo().values()) {
@@ -63,7 +56,6 @@
 					%>
 				</ul></li>
 			<%
-				}
 				}
 			%>
 		</ul>
@@ -98,8 +90,6 @@
 					<i class="fas fa-user-circle"></i> <%=user.getNome()%> <%=user.getCognome()%>
 			</a>
 				<ul class="dropdown-menu bg-dark">
-					<%! String sttDesc="sottomissione desc"; %>
-					<li class="dropdown-item"><a href="Ordine?toDo=utente&order=<%= sttDesc %>">Ordini effettuati</a></li>
 					<li class="dropdown-item"><a href="Profilo.jsp"> <i
 							class="fas fa-user"></i> Profilo
 					</a></li>
@@ -111,9 +101,6 @@
 				}
 			%>
 
-			<li id="cart-li" class="hvr nav-item"><a href="Carrello" id="cart-item"
-				class="nav-link"> <i class="fas fa-shopping-cart"></i>
-			</a></li>
 		</ul>
 	</div>
 </nav>

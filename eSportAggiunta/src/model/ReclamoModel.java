@@ -8,7 +8,6 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import beans.OrdineBean;
 import beans.ReclamoBean;
 
 public class ReclamoModel {

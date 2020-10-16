@@ -117,13 +117,13 @@
                                                 <p><%= r.getCommento() %></p>
                                                                             
                                                 <button id="carrello-button" class="btn btn-secondary bg-dark text-white">
-				                              		<a class="text-light a-btt" href="#">
+				                              		<a class="text-light a-btt" href="AggiornaReclamo?stato=Approvato&reclamoId=<%= r.getId() %>">
 				                              			Approva
 				                              		</a>
 				                          		</button>
 				                          		
 				                          		<button id="carrello-button" class="btn btn-secondary bg-dark text-white">
-				                              		<a class="text-light a-btt" href="#">
+				                              		<a class="text-light a-btt" href="AggiornaReclamo?stato=Rifiutato&reclamoId=<%= r.getId() %>">
 				                              			Rifiuta
 				                              		</a>
 				                          		</button>
@@ -145,7 +145,7 @@
 	      				
 	      				<%
 	      					for(ReclamoBean r: reclami){
-	      						if(r.getStato().equals(ReclamoBean.APPROVATO) && r.getStato().equals(ReclamoBean.RIFIUTATO)
+	      						if(r.getStato().equals(ReclamoBean.APPROVATO) || r.getStato().equals(ReclamoBean.RIFIUTATO)
 	      								&& reclami.size()!=0){
 	      							areChiusi=true;
 	      				%>

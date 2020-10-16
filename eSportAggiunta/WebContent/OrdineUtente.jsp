@@ -138,6 +138,13 @@
 				                              			Visualizza dettagli
 				                              		</a>
 				                          		</button>
+				                          		
+				                          		<button id="carrello-button" class="btn btn-secondary bg-dark text-white">
+				                              		<a class="text-light a-btt" href="SottomissioneReclamo?needTo=write&numeroOrdine=<%= o.getNumero() %>">
+				                              			Effettua un reclamo
+				                              		</a>
+				                          		</button>
+				                          		
                                             </div>
                                         </div>
                                     </div>

@@ -43,7 +43,7 @@ public class SottomissioneReclamo extends HttpServlet {
 		log.info("SottomissioneReclamo -> controllo che l'utente sia autenticato");
 		Boolean userAuth=(Boolean) session.getAttribute("userAuth");
 		if((userAuth==null) || (!userAuth.booleanValue())) {
-			session.setAttribute("previousPage", ""); //da aggiustare con tiz
+			session.setAttribute("previousPage", "");
 
 			redirectedPage="/Login.jsp";
 			response.sendRedirect(request.getContextPath() + redirectedPage);
@@ -52,7 +52,7 @@ public class SottomissioneReclamo extends HttpServlet {
 			log.info("SottomissioneReclamo -> se autenticato e ha fatto l'ordine procedo");
 
 			if(needTo.equals(WRITE)) {
-				session.setAttribute("numeroOrdine", numeroOrdine); //QUI C'E IL NOSTRO ZAMPINO
+				session.setAttribute("numeroOrdine", numeroOrdine);
 				
 				redirectedPage="/LasciaReclamo.jsp";
 				response.sendRedirect(request.getContextPath() + redirectedPage);
@@ -77,7 +77,7 @@ public class SottomissioneReclamo extends HttpServlet {
 						session.setAttribute("erroreCommento", "errore");
 					
 					session.setAttribute("commento", commento);
-					response.sendRedirect(request.getContextPath() + "/LasciaReclamo?needTo=write&numeroOrdine=" + numeroOrdine);
+					response.sendRedirect(request.getContextPath() + "/SottomissioneReclamo?needTo=write&numeroOrdine=" + numeroOrdine);
 				}
 				else {
 					

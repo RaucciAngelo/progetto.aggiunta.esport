@@ -14,13 +14,16 @@ public class ReclamoModel {
 	private static final String TABLE_NAME="reclamo";
 	static Logger log=Logger.getLogger("ReclamoModelDebugger");
 	
+	/**
+	 * 
+	 * @param reclamo
+	 * @throws SQLException
+	 */
 	public void doSave(ReclamoBean reclamo) throws SQLException {
-		log.info("IndirizzoModel -> doSave");
+		log.info("ReclamoModel -> doSave");
 		
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
-		
-		log.info("doSave -> verifico la correttezza dell'indirizzo da salvare");
 		
 		log.info("doSave -> eseguo query");
 		String insertSQL="insert into " + ReclamoModel.TABLE_NAME
@@ -50,11 +53,11 @@ public class ReclamoModel {
 			}
 		}
 		
-		log.info("IndirizzoModel -> doSave terminato");
+		log.info("ReclamoModel -> doSave terminato");
 	}
 
 	public Set<ReclamoBean> doRetrieveAll(String order) throws SQLException{
-		log.info("OrdineModel -> doRetrieveAll");
+		log.info("ReclamoModel -> doRetrieveAll");
 		LinkedHashSet<ReclamoBean> reclami=new LinkedHashSet<ReclamoBean>();
 		
 		Connection connection=null;
@@ -93,13 +96,13 @@ public class ReclamoModel {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
-		log.info("OrdineModel -> doRetrieveAll terminato");
+		log.info("ReclamoModel -> doRetrieveAll terminato");
 		
 		return reclami;
 	}
 	
 	public Set<ReclamoBean> doRetrieveIfAttivi() throws SQLException{
-		log.info("OrdineModel -> doRetrieveIfAttivi");
+		log.info("ReclamoModel -> doRetrieveIfAttivi");
 		LinkedHashSet<ReclamoBean> reclami=new LinkedHashSet<ReclamoBean>();
 		
 		Connection connection=null;
@@ -136,13 +139,13 @@ public class ReclamoModel {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
-		log.info("OrdineModel -> doRetrieveIfAttivi terminato");
+		log.info("ReclamoModel -> doRetrieveIfAttivi terminato");
 		
 		return reclami;
 	}
 	
 	public boolean doUpdate(ReclamoBean reclamo) throws SQLException {
-		log.info("OrdineModel -> aggiornaStato");
+		log.info("ReclamoModel -> aggiornaStato");
 		int result=0;
 		
 		Connection connection = null;
@@ -175,7 +178,7 @@ public class ReclamoModel {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
-		log.info("OrdineModel -> aggiornaStato terminato");	
+		log.info("ReclamoModel -> aggiornaStato terminato");	
 		
 		return (result!=0);
 	}

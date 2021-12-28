@@ -15,7 +15,7 @@ public class ReclamoModel {
 	static Logger log=Logger.getLogger("ReclamoModelDebugger");
 	
 	/**
-	 * 
+	 * Permette di salvare un reclamo nel DB
 	 * @param reclamo
 	 * @throws SQLException
 	 */
@@ -56,6 +56,12 @@ public class ReclamoModel {
 		log.info("ReclamoModel -> doSave terminato");
 	}
 
+	/**
+	 * Permette di ottenere tutti i reclami dal DB specificando un ordinamento
+	 * @param order
+	 * @return
+	 * @throws SQLException
+	 */
 	public Set<ReclamoBean> doRetrieveAll(String order) throws SQLException{
 		log.info("ReclamoModel -> doRetrieveAll");
 		LinkedHashSet<ReclamoBean> reclami=new LinkedHashSet<ReclamoBean>();
@@ -101,6 +107,11 @@ public class ReclamoModel {
 		return reclami;
 	}
 	
+	/**
+	 * Permette di ottenere tutti i reclami attivi dal DB
+	 * @return
+	 * @throws SQLException
+	 */
 	public Set<ReclamoBean> doRetrieveIfAttivi() throws SQLException{
 		log.info("ReclamoModel -> doRetrieveIfAttivi");
 		LinkedHashSet<ReclamoBean> reclami=new LinkedHashSet<ReclamoBean>();
@@ -144,6 +155,12 @@ public class ReclamoModel {
 		return reclami;
 	}
 	
+	/**
+	 * Permette di aggiornare i dati di un reclamo memorizzato nel DB
+	 * @param reclamo
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean doUpdate(ReclamoBean reclamo) throws SQLException {
 		log.info("ReclamoModel -> aggiornaStato");
 		int result=0;

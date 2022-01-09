@@ -11,7 +11,7 @@ public class ReclamoSuite {
 		suite.addTest(new ReclamoModelTestCase("doSave"));
 		suite.addTest(new ReclamoModelTestCase("doRetrieveAll"));
 		suite.addTest(new ReclamoModelTestCase("doRetrieveIfAttivi"));
-		suite.addTest(new ReclamoModelTestCase("doRetrieveUpdate"));
+		suite.addTest(new ReclamoModelTestCase("doUpdate"));
 
 		return suite;
 	}

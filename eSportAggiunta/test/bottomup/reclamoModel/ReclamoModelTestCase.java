@@ -57,6 +57,11 @@ public class ReclamoModelTestCase extends TestCase {
 		
 	}
 	
+	/*//Test doRetrieveAll copiato da ordine
+		public void doRetrieveAll() throws SQLException {
+			assertNotNull(reclamoModel.doRetrieveAll(""));
+		}*/
+	
 	public void doRetrieveAll() throws SQLException {
 		//Creo prodotto
 		OrdineBean ordine = new OrdineBean();
@@ -76,6 +81,17 @@ public class ReclamoModelTestCase extends TestCase {
 		assertNull(reclami);
 	}
 	
+	/*//Test doRetrieveIfAttivi copiato da ordine
+		public void doRetrieveIfAttivi() throws SQLException {
+			//Caso corretto
+			LinkedHashSet<ReclamoBean> reclami=(LinkedHashSet<ReclamoBean>) reclamoModel.doRetrieveIfAttivi();
+			
+			//Verifico caso corretto
+			assertNotNull(reclami);
+			
+			for(ReclamoBean o: reclami)
+				assertFalse(o.getStato().equals(ReclamoBean.APPROVATO));
+		}*/
 	
 	public void doRetrieveIfAttivi() throws SQLException {
 		//Creo ordine
@@ -96,6 +112,19 @@ public class ReclamoModelTestCase extends TestCase {
 		//Verifico caso corretto
 		assertNull(reclami);
 	}
+	
+	
+	/*public void doUpdate() throws SQLException {
+		//Imposto delle modifiche
+		reclamoTest.setStato(ReclamoBean.IN_ATTESA);
+		
+		reclamoModel.doUpdate(reclamoTest);
+		
+		ReclamoBean reclamo = reclamoModel.doRetrieveAll(reclamoTest.getOrdine());
+
+		assertTrue(reclamo.getStato().equals(ReclamoBean.IN_ATTESA));
+	}*/
 
 	private ReclamoModel reclamoModel;
+	private ReclamoBean reclamoTest;
 }

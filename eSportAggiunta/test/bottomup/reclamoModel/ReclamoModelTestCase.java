@@ -57,12 +57,12 @@ public class ReclamoModelTestCase extends TestCase {
 		
 	}
 	
-	/*//Test doRetrieveAll copiato da ordine
+	//Test doRetrieveAll copiato da ordine
 		public void doRetrieveAll() throws SQLException {
 			assertNotNull(reclamoModel.doRetrieveAll(""));
-		}*/
+		}
 	
-	public void doRetrieveAll() throws SQLException {
+	/*public void doRetrieveAll() throws SQLException {
 		//Creo prodotto
 		OrdineBean ordine = new OrdineBean();
 		ordine.setNumero("001");
@@ -79,9 +79,9 @@ public class ReclamoModelTestCase extends TestCase {
 
 		//Verifico caso corretto
 		assertNull(reclami);
-	}
+	}*/
 	
-	/*//Test doRetrieveIfAttivi copiato da ordine
+	//Test doRetrieveIfAttivi copiato da ordine
 		public void doRetrieveIfAttivi() throws SQLException {
 			//Caso corretto
 			LinkedHashSet<ReclamoBean> reclami=(LinkedHashSet<ReclamoBean>) reclamoModel.doRetrieveIfAttivi();
@@ -91,9 +91,9 @@ public class ReclamoModelTestCase extends TestCase {
 			
 			for(ReclamoBean o: reclami)
 				assertFalse(o.getStato().equals(ReclamoBean.APPROVATO));
-		}*/
+		}
 	
-	public void doRetrieveIfAttivi() throws SQLException {
+	/*public void doRetrieveIfAttivi() throws SQLException {
 		//Creo ordine
 		OrdineBean ordine = new OrdineBean();
 		ordine.setNumero("001");
@@ -111,7 +111,7 @@ public class ReclamoModelTestCase extends TestCase {
 
 		//Verifico caso corretto
 		assertNull(reclami);
-	}
+	}*/
 	
 	
 	/*public void doUpdate() throws SQLException {

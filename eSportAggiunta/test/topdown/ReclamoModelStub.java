@@ -37,9 +37,9 @@ public class ReclamoModelStub {
 		LinkedHashSet<ReclamoBean> reclami = new LinkedHashSet<ReclamoBean>();
 		
 		log.info("metodo: doRetrieveIfAttivi -> metodo: doCount -> ottengo gli ordini per la generazione del numero");
-		LinkedHashSet<ReclamoBean> listaOrdini=(LinkedHashSet<ReclamoBean>) doRetrieveAll();
+		LinkedHashSet<ReclamoBean> listaReclami=(LinkedHashSet<ReclamoBean>) doRetrieveAll();
 		
-		for(ReclamoBean reclamo : listaOrdini)
+		for(ReclamoBean reclamo : listaReclami)
 			if(reclamo.getStato().equals(ReclamoBean.IN_ATTESA)) 
 				reclami.add(reclamo);
 		

@@ -1,6 +1,7 @@
 package bottomup.reclamoModel;
 
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 
 import beans.OrdineBean;
@@ -23,9 +24,9 @@ public class ReclamoModelTestCase extends TestCase {
 	public void doSave() throws SQLException {
 		//Creo prodotto
 		OrdineBean ordine = new OrdineBean();
-		ordine.setNumero("002");
+		ordine.setNumero("000002");
 
-		//Creo la taglia
+		//Creo il reclamo
 		ReclamoBean reclamo = new ReclamoBean();
 		
 		//Caso corretto
@@ -38,7 +39,7 @@ public class ReclamoModelTestCase extends TestCase {
 		
 		reclamoModel.doSave(reclamo);
 				
-		LinkedHashSet<ReclamoBean> reclami=(LinkedHashSet<ReclamoBean>) reclamoModel.doRetrieveAll(ordine.getNumero());
+		LinkedHashSet<ReclamoBean> reclami=(LinkedHashSet<ReclamoBean>) reclamoModel.doRetrieveAll("");
 				
 		//Verifico caso corretto
 		assertFalse(reclami.isEmpty());
@@ -46,40 +47,21 @@ public class ReclamoModelTestCase extends TestCase {
 				
 		//Caso errato commento troppo corto
 		reclamo.setCommento("Brutto");
+		reclamo.setId(2);
 				
 		reclamoModel.doSave(reclamo);
 				
-		/* reclami=(LinkedHashSet<ReclamoBean>) reclamoModel.doRetrieveAll(ordine.getNumero());
+		reclami=(LinkedHashSet<ReclamoBean>) reclamoModel.doRetrieveAll("");
 				
 		//Verifico caso corretto
-		assertFalse(reclami.contains(reclamo)); */
-		
+		assertFalse(reclami.contains(reclamo));
 		
 	}
 	
-	//Test doRetrieveAll copiato da ordine
+	//Test doRetrieveAll 
 		public void doRetrieveAll() throws SQLException {
 			assertNotNull(reclamoModel.doRetrieveAll(""));
 		}
-	
-	/*public void doRetrieveAll() throws SQLException {
-		//Creo prodotto
-		OrdineBean ordine = new OrdineBean();
-		ordine.setNumero("001");
-				
-		//Caso corretto
-		LinkedHashSet<ReclamoBean> reclami=(LinkedHashSet<ReclamoBean>) reclamoModel.doRetrieveAll(ordine.getNumero());
-
-		//Verifico caso corretto
-		assertFalse(reclami.isEmpty());
-		assertNotNull(reclami);
-				
-		//Caso errato
-		reclami=(LinkedHashSet<ReclamoBean>) reclamoModel.doRetrieveAll("");
-
-		//Verifico caso corretto
-		assertNull(reclami);
-	}*/
 	
 	//Test doRetrieveIfAttivi copiato da ordine
 		public void doRetrieveIfAttivi() throws SQLException {
@@ -90,41 +72,44 @@ public class ReclamoModelTestCase extends TestCase {
 			assertNotNull(reclami);
 			
 			for(ReclamoBean o: reclami)
-				assertFalse(o.getStato().equals(ReclamoBean.APPROVATO));
+				assertTrue(o.getStato().equals(ReclamoBean.IN_ATTESA));
 		}
 	
-	/*public void doRetrieveIfAttivi() throws SQLException {
-		//Creo ordine
-		OrdineBean ordine = new OrdineBean();
-		ordine.setNumero("001");
-				
-		//Caso corretto
-		LinkedHashSet<ReclamoBean> reclami = (LinkedHashSet<ReclamoBean>) reclamoModel.doRetrieveIfAttivi();
-		
-
-		//Verifico caso corretto
-		assertFalse(reclami.isEmpty());
-		assertNotNull(reclami);
-				
-		//Caso errato
-		reclami = (LinkedHashSet<ReclamoBean>) reclamoModel.doRetrieveIfAttivi();
-
-		//Verifico caso corretto
-		assertNull(reclami);
-	}*/
 	
-	
-	/*public void doUpdate() throws SQLException {
+	public void doUpdate() throws SQLException {
 		//Imposto delle modifiche
-		reclamoTest.setStato(ReclamoBean.IN_ATTESA);
 		
+		LinkedHashSet<ReclamoBean> reclami = (LinkedHashSet<ReclamoBean>) reclamoModel.doRetrieveAll("");
+		
+		ReclamoBean reclamoTest = reclami.iterator().next();
+		
+		String stato = reclamoTest.getStato();
+		String updated = "";
+		if(!stato.equals(ReclamoBean.IN_ATTESA)) {
+			updated = ReclamoBean.IN_ATTESA;
+		} else if(!stato.equals(ReclamoBean.APPROVATO)) {
+			updated = ReclamoBean.APPROVATO;
+		} else if(!stato.equals(ReclamoBean.RIFIUTATO)) {
+			updated = ReclamoBean.RIFIUTATO;
+		} 
+		reclamoTest.setStato(updated);
 		reclamoModel.doUpdate(reclamoTest);
 		
-		ReclamoBean reclamo = reclamoModel.doRetrieveAll(reclamoTest.getOrdine());
-
-		assertTrue(reclamo.getStato().equals(ReclamoBean.IN_ATTESA));
-	}*/
+		reclami = (LinkedHashSet<ReclamoBean>) reclamoModel.doRetrieveAll("");
+		Iterator<ReclamoBean> it = reclami.iterator();
+		ReclamoBean tested = null;
+		while (it.hasNext()) {
+			ReclamoBean temp = it.next();
+			if (reclamoTest.getId() == temp.getId()) {
+				tested = temp;
+				break;
+			}
+		}
+		
+		assertEquals(tested.getStato(), updated);
+		tested.setStato(stato);
+		reclamoModel.doUpdate(tested);
+	}
 
 	private ReclamoModel reclamoModel;
-	private ReclamoBean reclamoTest;
 }
